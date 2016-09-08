@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title_block %}
+    Edit Authors
+{% endblock %}
+{% block body_block %}
+    <h1>Edit Authors</h1>
+    <br/>
+    <br/>
+    <h2>Add Author</h2>
+    <div class="commentForm">
+        <form action="{% url 'edit_authors_view' %}" method="post">{% csrf_token %}
+            {{ form.nick }}
+            <br/>
+            <br/>
+            {{ form.email }}
+            <br/>
+            <br/>
+            <input type="submit" value="Add"/>
+        </form>
+    </div>
+    <br/>
+    <br/>
+    {% if authors %}
+        <h2>Authors List</h2>
+        {% for author in authors %}
+            <div class="thumbnail">
+                <div class="caption" style="text-align: center;">
+                    <h3>Nick: {{ author.nick }}</h3>
+                    <h3>Email: {{ author.email }}</h3>
+                    <a href="{% url 'edit_author_view' author_id=author.id %}">Edit</a>
+                    or
+                    <a href="{% url 'delete_author' author_id=author.id %}">Delete</a>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="postShowMore">
+        <a href="{% url 'administration_view' %}">Back to Previous</a>
+    </div>
+{% endblock %}

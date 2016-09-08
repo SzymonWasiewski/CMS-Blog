@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title_block %}
+    Add Author
+{% endblock %}
+{% block body_block %}
+    <h2>Add author </h2>
+    <form action="{% url 'edit_author_view' author_id=author.id %}" method="post">{% csrf_token %}
+        <div class="input-group">
+            <span class="input-group-addon">Author:</span>
+            <span class="input-group-addon"> {{ form.nick }} </span>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">Email:</span>
+            <span class="input-group-addon"> {{ form.email }}  </span>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon"></span>
+            <span class="input-group-addon"><input type="submit" value="Edit"/></span>
+        </div>
+    </form>
+
+{% endblock %}

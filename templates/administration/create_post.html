@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title_block %}
+    Create Post
+{% endblock %}
+{% block body_block %}
+    <h1>Add new post</h1>
+    <br/>
+    <br/>
+    <div class="commentForm">
+        <form action="{% url 'create_post_view' %}" method="post">{% csrf_token %}
+            {{ form.title }}<br/>
+            {{ form.tags }}<br/>
+            {{ form.content }}<br/>
+            {{ form.author }} <br/>
+            <div style="margin-left: 20.3%;">
+                {{ form.image }}
+            </div>
+            <br/>
+            <input type="submit" value="Submit"/><br/>
+        </form>
+        <br/>
+        <div class="postShowMore">
+            <a href="{% url 'administration_view' %}">Back to Previous</a>
+        </div>
+    </div>
+
+{% endblock %}

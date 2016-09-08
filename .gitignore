@@ -1,0 +1,5 @@
+db.sqlite3
+passenger_wsgi.py
+passenger_wsgi.pyc
+CMS/settings.py
+CMS/settings.pyc

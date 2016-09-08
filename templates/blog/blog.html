@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title_block %}
+    Page {{ posts.number }} of {{ posts.paginator.num_pages }}
+{% endblock %}
+{% block body_block %}
+    {% if posts %}
+        {% for post in posts %}
+            <div class="postBox">
+                <div class="postTitle">
+                    <h3>{{ post.title }}</h3>
+                </div>
+
+                <div class="postDate">
+                    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                    <small> {{ post.published_date|date:"M d, Y " }}</small>
+                    <div class="postTags">
+                        <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>
+                        <small> {{ post.tags }}</small>
+                    </div>
+                </div>
+                <div class="postContent">
+                    {% if post.image %}
+                        <img src="{{ MEDIA_URL }}{{ post.image }}" class="img-fluid" alt="Responsive image"/>
+                    {% endif %}
+                    {% if post.content_length <= 700 %}
+                        <p>{{ post.content }}</p>
+                    {% else %}
+                        <p>{{ post.content|slice:"0:700"|linebreaksbr }}..</p>
+                    {% endif %}
+                    <div class="postReadMore">
+                        <a href="{% url 'post_view' pk=post.pk %}">Read more</a>
+                    </div>
+
+                </div>
+
+                <div class="postFooter">
+                    <p>posted by <strong>{{ post.author }}</strong></p>
+                </div>
+
+            </div>
+        {% endfor %}
+    {% else %}
+        <h1>There is no posts.</h1>
+    {% endif %}
+    <div class="postShowMore">
+            <div class="pagination">
+                <span class="page-links">
+                    {% if posts.has_previous %}
+                        <a href="{% url 'blog_view' page=posts.previous_page_number %}"> Previous page - </a>
+                    {% endif %}
+                    <span class="page-current">
+                        Page {{ posts.number }} of {{ posts.paginator.num_pages }}
+                    </span>
+                    {% if posts.has_next %}
+                        <a href="{% url 'blog_view' page=posts.next_page_number %}"> - Next page </a>
+                    {% endif %}
+                </span>
+            </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title_block %}
+    Edit Post
+{% endblock %}
+{% block body_block %}
+    <form action="{% url 'edit_comment_view' comment_id=comment.id %}" method="post">{% csrf_token %}
+        <div class="input-group">
+            <span class="input-group-addon">Approved:</span>
+            <span class="input-group-addon">{{ form.approved }} </span>
+        </div>
+
+        <div class="input-group">
+            <span class="input-group-addon">Content: </span>
+            <span class="input-group-addon"> {{ form.content }}  </span>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">Author:</span>
+            <span class="input-group-addon"> {{ form.author }} </span>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">Email:</span>
+            <span class="input-group-addon"> {{ form.email }}  </span>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon"></span>
+            <span class="input-group-addon"><input type="submit" value="Edit"/></span>
+        </div>
+    </form>
+    <a href="{% url 'delete_comment_view' comment_id=comment.id %}">Delete</a>
+
+{% endblock %}

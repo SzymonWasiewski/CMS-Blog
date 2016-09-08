@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title_block %}
+    Edit Comments
+{% endblock %}
+{% block body_block %}
+    <h1> Edit Comments </h1>
+    <div class="postComments" style="text-align: center;">
+        {% if comments %}
+            {% for comment in comments %}
+                <br/>
+                <div class="thumbnail">
+                    <div class="caption" style="text-align: center;">
+                        <strong>Comment</strong><br/> {{ comment.content }} <br/>
+                        {% if comment.approved %}
+                            <strong>Approved</strong>
+                        {% else %}
+                            <strong style="color: red;">Not Approved</strong>
+                        {% endif %}
+                        {{ comment.date }}<br/>
+                        posted by <strong>{{ comment.author }}</strong>
+                        - {{ comment.email }} <br/>
+                        <a href="{% url 'edit_comment_view' comment_id=comment.id %}">Edit</a>
+                        or
+                        <a href="{% url 'delete_comment_view' comment_id=comment.id %}">Delete</a>
+                        <br/>
+                        <br/>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h1>There is no comments</h1>
+        {% endif %}
+        <div class="postShowMore">
+            <a href="{% url 'administration_view' %}">Back to Previous</a>
+        </div>
+    </div>
+{% endblock %}
